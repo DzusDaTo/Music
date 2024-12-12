@@ -30,6 +30,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'src.oauth',
+    'rest_framework.authtoken',
+    'rest_framework_simplejwt',
 ]
 
 MIDDLEWARE = [
@@ -121,12 +123,38 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ALGORITHM = 'HS256'
 ACCESS_TOKEN_EXPIRE_MINUTES = 60 * 24
 
+SPOTIFY_CLIENT_ID = '36b123eaee53427689d7db0e5320281b'
+SPOTIFY_SECRET = '38e907d09ec945bbbb46b741ae64be3c'
+
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': ('src.oauth.services.auth_backend.AuthBackend',),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'src.oauth.services.auth_backend.AuthBackend',
+        'django.contrib.auth.backends.ModelBackend',
+    ),
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny'
-    ]
+        'rest_framework.permissions.AllowAny',
+    ],
 }
+AUTH_USER_MODEL = 'oauth.AuthUser'
+
+
+CSRF_COOKIE_SECURE = False
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
+
 
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {

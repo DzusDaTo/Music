@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'src.oauth',
     'rest_framework.authtoken',
     'rest_framework_simplejwt',
+    'src.audio_library',
 ]
 
 MIDDLEWARE = [

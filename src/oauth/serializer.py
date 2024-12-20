@@ -39,7 +39,7 @@ class UserSerializer(serializers.ModelSerializer):
         avatar = validated_data.get('avatar')
         if avatar:
             user.avatar = avatar
-            user.save()  # Сохраняем пользователя снова, чтобы применить аватар
+            user.save()
 
         return user
 
